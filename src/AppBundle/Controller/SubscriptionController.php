@@ -22,13 +22,10 @@ use FOS\RestBundle\Controller\Annotations\Put;
  */
 class SubscriptionController extends Controller
 {
-
-
     /**
      * @Post(
      *     path = "/",
      *     name = "subscription_new",
-     *
      * )
      * @View
      */
@@ -37,7 +34,6 @@ class SubscriptionController extends Controller
         $subscription = new Subscription();
         //  $form = $this->createForm('AppBundle\Form\SubscriptionType', $subscription);
         //  $form->handleRequest($request);
-
         //  if ($form->isSubmitted() && $form->isValid()) {
         $em = $this->getDoctrine()->getManager();
         $em->persist($subscription);
@@ -46,9 +42,7 @@ class SubscriptionController extends Controller
 //            $serializer = $this->container->get('jms_serializer');
 //            $serializedEntity = $serializer->serialize($subscription->getId(), 'json');
 //            return  new response($serializedEntity,200, array('Content-Type' => 'application/json'));
-
         //  }
-
 //        return $this->render('subscription/new.html.twig', array(
 //            'subscription' => $subscription,
 //            'form' => $form->createView(),
@@ -66,7 +60,6 @@ class SubscriptionController extends Controller
      * @View
      */
 
-
     public function showAction($id, Subscription $subscription)
     {
         return $this->get('app.subscription.service')->show($subscription);
@@ -76,46 +69,37 @@ class SubscriptionController extends Controller
 //        $serializer = $this->container->get('jms_serializer');
 //        $serializedEntity = $serializer->serialize($subscription, 'json');
 //        return  new response($serializedEntity,200, array('Content-Type' => 'application/json'));
-
     }
-
 
     /**
      * @Put(
      *     path = "/{id}/",
      *     name = "subscription_edit",
-     *
      * )
      * @View
      */
     public function editAction(Request $request, Subscription $subscription)
     {
 
-//        $editForm = $this->createForm('AppBundle\Form\SubscriptionType', $subscription);
-//        $editForm->handleRequest($request);
-//
-//        if ($editForm->isSubmitted() && $editForm->isValid()) {
+//      $editForm = $this->createForm('AppBundle\Form\SubscriptionType', $subscription);
+//      $editForm->handleRequest($request);
+//      if ($editForm->isSubmitted() && $editForm->isValid()) {
         $em = $this->get('doctrine.orm.entity_manager');
         $subscription = $em->getRepository('AppBundle:Subscription')
             ->find($request->get('id'));
         $em->flush();
-
-
         return $subscription;
         /// }
 //        return $this->render('subscription/edit.html.twig', array(
 //            'subscription' => $subscription,
 //            'editform' => $editForm->createView(),
 //        ));
-
     }
-
 
     /**
      * @Delete(
      *     path = "/{id}/delete/",
      *     name = "subscription_delete",
-     *
      * )
      * @View
      */
@@ -123,11 +107,7 @@ class SubscriptionController extends Controller
     {
         // $form = $this->createForm($subscription);
         //  $form->handleRequest($request)
-
         //   if ($form->isSubmitted() && $form->isValid()) {
-
         return $this->get('app.subscription.service')->delete($id);
     }
-
-
 }
